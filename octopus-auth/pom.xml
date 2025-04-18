@@ -10,8 +10,8 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>octopus-app</artifactId>
-	<name>Application</name>
+	<artifactId>octopus-auth</artifactId>
+	<name>Authentication and Authorization</name>
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,15 +23,16 @@
 			<artifactId>octopus-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
-		<!-- DATABASE -->
+		
+		<!-- SECURITY -->
 		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-core</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
+		    <groupId>io.jsonwebtoken</groupId>
+    		<artifactId>jjwt</artifactId>
+		    <version>${jjwt.version}</version>
 		</dependency>
 	</dependencies>
 </project>

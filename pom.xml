@@ -17,6 +17,7 @@
 	<modules>
 		<module>octopus-app</module>
 		<module>octopus-core</module>
+		<module>octopus-auth</module>
 	</modules>
 	
 	<name>Octopus Api</name>
