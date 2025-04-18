@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: octopus-api
+  datasource:
+    driver-class-name: org.h2.Driver
+    password: 123
+    url: "jdbc:h2:mem:OCTOPUS-DB;INIT=CREATE SCHEMA IF NOT EXISTS APP;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;"
+    username: start-db
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate.boot.allow_jdbc_metadata_access: false
+    show-sql: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    default-schema: APP
+    enabled: true
+---
+security:
+  jwt:
+    expiration-time: 3600000 # 1h in milliseconds
+    secret-key: YWRkYzE0OGExNzhiNjUxNzYzYTE1ZWE3OTc3ODZmZWQ5ZmQ1YWJiODMzNmFlYWFmYjFlOWVkOTg2Nzk1YTg5ZSAgLQo=
+---
+logging:
+  level:
+    br.com.poupex.gif.api.clients: TRACE
+    org.hibernate.SQL: TRACE
+    org.springframework.boot.actuate.endpoint.web: TRACE
+    org.springframework.boot.web.servlet.ServletContextInitializerBeans: TRACE
+    org.springframework.core.codec: TRACE
+    org.springframework.http: TRACE
+    org.springframework.jdbc.core: TRACE
+    org.springframework.security: TRACE
+    org.springframework.security.oauth2: TRACE
+    org.springframework.web: TRACE
+    tomcat: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd E HH:mm:ss.SSS} %clr(%-5level) --- [%magenta(%thread)] %cyan(%c{1}) : %clr(%msg%n%ex) %nopex"
