@@ -15,9 +15,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<modules>
-		<module>octopus-app</module>
 		<module>octopus-core</module>
 		<module>octopus-auth</module>
+		<module>octopus-app</module>
 	</modules>
 	
 	<name>Octopus Api</name>
@@ -36,6 +36,7 @@
 	</developers>
 	
 	<properties>
+		<spring-boot.version>3.4.4</spring-boot.version>
 		<java.version>21</java.version>
 		<h2-version>2.1.210</h2-version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
@@ -76,6 +77,14 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+		
 			<!-- STRUCTURE -->
 			<dependency>
 				<groupId>org.projectlombok</groupId>

@@ -18,9 +18,15 @@
 	</properties>
 	
 	<dependencies>
+		<!-- MODULES -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>octopus-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>octopus-auth</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
