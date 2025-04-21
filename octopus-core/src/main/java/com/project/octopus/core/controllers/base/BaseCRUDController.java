@@ -19,20 +19,20 @@ public abstract class BaseCRUDController<E extends BaseEntity, D extends BaseDto
 	    return ResponseEntity.ok(getService().convert(entity));
 	}
 
-	protected ResponseEntity<String> update(Long codigo, D input) {
-		getService().update(codigo, input);
+	protected ResponseEntity<String> update(Long code, D input) {
+		getService().update(code, input);
 
 	    return getSucess();
 	}
 
-	protected ResponseEntity<String> disable(Long codigo) {
-		getService().disable(codigo);
+	protected ResponseEntity<String> disable(Long code) {
+		getService().disable(code);
 
 	    return getSucess();
 	}
 
-	protected ResponseEntity<String> remove(Long codigo) {
-		getService().remove(codigo);
+	protected ResponseEntity<String> remove(Long code) {
+		getService().remove(code);
 
 	    return getSucess();
 	}
