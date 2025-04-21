@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,11 +13,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import com.project.octopus.core.commons.messages.MessageManager;
 import com.project.octopus.core.commons.support.exceptions.NotFoundException;
 import com.project.octopus.core.domain.base.BaseDto;
 import com.project.octopus.core.domain.base.BaseEntity;
 import com.project.octopus.core.domain.base.BaseMapper;
 import com.project.octopus.core.repositories.base.BaseRepository;
+
+import lombok.Getter;
 
 @Validated
 @Component
@@ -26,12 +30,12 @@ public abstract class BaseService<E extends BaseEntity, D extends BaseDto> {
     public abstract BaseMapper<E, D> getMapper();
     public abstract String getEntityName();
 
-//	@Getter
-//	@Autowired
-//	protected MessageManager messages;
+	@Getter
+	@Autowired
+	protected MessageManager messages;
 //	@Lazy
 //	@Autowired
-//	protected EventoService eventoService;
+//	protected EventService eventService;
 	
 	public E findByCode(Long code){
 		var entity = (code!=null) ? getRepository().findOneByCodeAndEnabled(code, Boolean.TRUE)

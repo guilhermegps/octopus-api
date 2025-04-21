@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 public class BaseDto {
 
 	@JsonProperty(access = Access.READ_ONLY)
-	protected Long codigo;
+	protected Long code;
 	@JsonProperty(access = Access.READ_ONLY)
-	protected Boolean ativo;
+	protected Boolean enabled;
 }
