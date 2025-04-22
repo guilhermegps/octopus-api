@@ -23,7 +23,7 @@ public abstract class BaseController<E extends BaseEntity, D extends BaseDto> {
 		return getService().getMessages();
 	}
 	
-	public ResponseEntity<D> detail(Long code){
+	public ResponseEntity<D> toDetail(Long code){
 		var entity = getService().findByCode(code);
 		
 		return toResponse(entity);
@@ -40,10 +40,14 @@ public abstract class BaseController<E extends BaseEntity, D extends BaseDto> {
 	}
 	
 	protected ResponseEntity<D> toResponse(D dto){
-		var response = Optional.ofNullable(dto).map(ResponseEntity::ok).orElseThrow(NoSuchElementException::new);
+		var response = toResponse(dto, getService().getDtoClass());
 		
 		eventIn(EventTypeEnum.VIEW, "log.alert.record_details", getService().getEntityName(), dto.getCode());
 		return response;
+	}
+	
+	protected <T> ResponseEntity<T> toResponse(T obj, Class<T> clazz){
+		return Optional.ofNullable(obj).map(ResponseEntity::ok).orElseThrow(NoSuchElementException::new);
 	}
 	
 	protected ResponseEntity<List<D>> toResponse(List<E> list){
@@ -61,6 +65,6 @@ public abstract class BaseController<E extends BaseEntity, D extends BaseDto> {
 	}
 	
 	protected void eventIn(EventTypeEnum type, String keyMsg, Object... params) {
-//		getService().regEvento(tipo, getMessages().get(keyMsg, params));
+		getService().eventIn(type, getMessages().get(keyMsg, params));
 	}
 }

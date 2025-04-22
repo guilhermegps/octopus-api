@@ -40,7 +40,7 @@ public class Event extends BaseEntity {
 	private LocalDateTime dtEvent;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_tipo_evento", nullable = false)
+	@JoinColumn(name = "id_event_type", nullable = false)
 	private EventType type;
 	
 
