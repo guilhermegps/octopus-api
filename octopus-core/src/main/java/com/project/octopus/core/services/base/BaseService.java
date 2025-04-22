@@ -1,10 +1,13 @@
 package com.project.octopus.core.services.base;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +21,9 @@ import com.project.octopus.core.commons.support.exceptions.NotFoundException;
 import com.project.octopus.core.domain.base.BaseDto;
 import com.project.octopus.core.domain.base.BaseEntity;
 import com.project.octopus.core.domain.base.BaseMapper;
+import com.project.octopus.core.domain.enumerations.EventTypeEnum;
 import com.project.octopus.core.repositories.base.BaseRepository;
+import com.project.octopus.core.services.EventService;
 
 import lombok.Getter;
 
@@ -29,13 +34,20 @@ public abstract class BaseService<E extends BaseEntity, D extends BaseDto> {
 	protected abstract BaseRepository<E> getRepository();
     public abstract BaseMapper<E, D> getMapper();
     public abstract String getEntityName();
+    
+    @SuppressWarnings("unchecked")
+	public Class<D> getDtoClass() {
+        Type type = getClass().getGenericSuperclass();
+        ParameterizedType parameterizedType = (ParameterizedType) type;
+        return (Class<D>) parameterizedType.getActualTypeArguments()[0];
+    }
 
 	@Getter
 	@Autowired
 	protected MessageManager messages;
-//	@Lazy
-//	@Autowired
-//	protected EventService eventService;
+	@Lazy
+	@Autowired
+	protected EventService eventService;
 	
 	public E findByCode(Long code){
 		var entity = (code!=null) ? getRepository().findOneByCodeAndEnabled(code, Boolean.TRUE)
@@ -118,8 +130,8 @@ public abstract class BaseService<E extends BaseEntity, D extends BaseDto> {
 		return getMapper().convert(page);
 	}
 	
-//    public void regEvento(TipoEventoEnum tipo, String keyMsg, Object... params) {
-//		eventoService.registrar(tipo, getMessages().get(keyMsg, params));
-//	}
+    public void eventIn(EventTypeEnum type, String keyMsg, Object... params) {
+		eventService.register(type, getMessages().get(keyMsg, params));
+	}
 
 }
