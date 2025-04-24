@@ -56,7 +56,6 @@ public class AuthService {
 				        .password(u.getPassword())
 				        .authorities(AuthorityUtils.createAuthorityList(authorities))
 				        .profile(profile)
-				        .cpf(u.getCpf())
 				        .build();
 			});
 	}

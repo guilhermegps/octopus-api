@@ -16,6 +16,7 @@
 
 	<modules>
 		<module>octopus-core</module>
+		<module>octopus-personal</module>
 		<module>octopus-auth</module>
 		<module>octopus-app</module>
 	</modules>

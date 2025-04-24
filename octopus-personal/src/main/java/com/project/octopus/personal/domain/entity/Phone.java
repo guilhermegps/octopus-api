@@ -1,4 +1,4 @@
-package com.project.octopus.auth.domain.entity;
+package com.project.octopus.personal.domain.entity;
 
 import java.util.UUID;
 
@@ -21,22 +21,20 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @Entity
-@Table(schema = "AUTH")
+@Table(schema = "PERSONAL")
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserApp extends BaseEntity {
-	
-	@Column(length = 50, nullable = false)
-	private String username;
-	
-	@Column(length = 60, nullable = false)
-	private String password;
-	
-	@Column(name = "id_person", nullable = false)
-	private UUID idPerson;
+public class Phone extends BaseEntity {
+
+	@Column(length = 30, nullable = false)
+	private String number;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_profile")
-	private Profile profile;
+	@JoinColumn(name = "id_person")
+	private Person person;
+
+	public Phone(UUID id) {
+		this.id = id;
+	}
 
 }
