@@ -24,7 +24,6 @@ public class SessionUser implements UserDetails {
 	
 	private UUID idUser;
 	private String username;
-	private String cpf;
 	
 	private ProfileEnum profile;
 }
