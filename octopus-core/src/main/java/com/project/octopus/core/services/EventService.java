@@ -30,13 +30,13 @@ public class EventService {
 		register(typeEnum, descricao, SessionContext.sessionUser().getIdUser());
 	}
 	
-	public void register(@NotNull EventTypeEnum typeEnum, String description, @NotNull UUID idUser) {
+	public void register(@NotNull EventTypeEnum typeEnum, String description, @NotNull UUID userId) {
 		var event = Event.builder()
 				.type(typeEnum.toEntity())
 				.description(description)
-				.idUser(idUser)
+				.userId(userId)
 				.dtEvent(LocalDateTime.now())
-				.ipUser(getRequestIp())
+				.userIp(getRequestIp())
 				.enabled(Boolean.TRUE)
 				.build();
 		

@@ -1,11 +1,14 @@
 package com.project.octopus.personal.domain.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.project.octopus.core.domain.base.BaseEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,6 +40,9 @@ public class Person extends BaseEntity {
 	
 	@Column(length = 50, nullable = false)
 	private String email;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+	private List<Phone> phones;
 
 //	@ManyToOne(fetch = FetchType.LAZY)
 //	@JoinColumn(name = "id_address")

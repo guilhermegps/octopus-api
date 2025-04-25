@@ -32,11 +32,11 @@ public class UserApp extends BaseEntity {
 	@Column(length = 60, nullable = false)
 	private String password;
 	
-	@Column(name = "id_person", nullable = false)
-	private UUID idPerson;
+	@Column(name = "person_id", nullable = false)
+	private UUID personId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_profile")
+	@JoinColumn(name = "profile_id")
 	private Profile profile;
 
 }

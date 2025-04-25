@@ -30,7 +30,7 @@ public class Phone extends BaseEntity {
 	private String number;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_person")
+	@JoinColumn(name = "person_id")
 	private Person person;
 
 	public Phone(UUID id) {
