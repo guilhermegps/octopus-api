@@ -30,17 +30,17 @@ public class Event extends BaseEntity {
 	@Column(nullable = false)
 	private String description;
 
-	@Column(name = "ip_user")
-	private String ipUser;
+	@Column(name = "user_ip")
+	private String userIp;
 
-	@Column(name = "id_user", nullable = false)
-	private UUID idUser;
+	@Column(name = "user_id", nullable = false)
+	private UUID userId;
 
 	@Column(name = "dt_event", nullable = false)
 	private LocalDateTime dtEvent;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_event_type", nullable = false)
+	@JoinColumn(name = "event_type_id", nullable = false)
 	private EventType type;
 	
 
