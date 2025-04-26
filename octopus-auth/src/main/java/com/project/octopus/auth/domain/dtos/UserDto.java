@@ -1,5 +1,7 @@
 package com.project.octopus.auth.domain.dtos;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.project.octopus.core.domain.base.BaseDto;
@@ -30,6 +32,11 @@ public class UserDto extends BaseDto {
 	@Size(max = 30, min = 6)
 	private String password;
 
+	@NotNull
+	private ProfileEnum profile;
+	
+	// Personal data
+
 	@NotBlank
 	@Size(max =  100, min = 4)
 	private String name;
@@ -43,6 +50,8 @@ public class UserDto extends BaseDto {
 	private String email;
 
 	@NotNull
-	private ProfileEnum profile;
+	private LocalDate dtBirth;
+
+	private Character sex;
 
 }
