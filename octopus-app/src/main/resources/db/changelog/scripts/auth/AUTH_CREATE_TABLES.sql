@@ -14,12 +14,11 @@ CREATE TABLE AUTH.user_app (
 	id UUID DEFAULT RANDOM_UUID() NOT NULL,
 	code INT auto_increment NOT NULL UNIQUE,
 	enabled bool DEFAULT true NOT NULL,
-	id_profile UUID NOT NULL,
+	person_id UUID NOT NULL,
+	profile_id UUID NOT NULL,
 	username varchar(50) NOT NULL UNIQUE,
-	name varchar(100) NOT NULL,
-	cpf varchar(11) NOT NULL UNIQUE,
 	password varchar(255) NOT NULL,
-	email varchar(50) NOT NULL UNIQUE,
 	CONSTRAINT pk_user PRIMARY KEY (id),
-	CONSTRAINT fk_user_profile FOREIGN KEY (id_profile) REFERENCES AUTH.profile(id)
+	CONSTRAINT fk_user_person FOREIGN KEY (person_id) REFERENCES PERSONAL.person(id),
+	CONSTRAINT fk_user_profile FOREIGN KEY (profile_id) REFERENCES AUTH.profile(id)
 );

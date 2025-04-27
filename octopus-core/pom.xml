@@ -46,6 +46,23 @@
 			<artifactId>mapstruct</artifactId>
 		</dependency>
 		
+		<!-- UTILITIES -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		</dependency>
+		
+		<!-- SECURITY -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+    		<artifactId>jjwt</artifactId>
+		    <version>${jjwt.version}</version>
+		</dependency>
+		
 		<!-- TEST -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

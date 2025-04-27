@@ -5,6 +5,9 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 	  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
+	<include file="db/changelog/scripts/personal/PERSONAL_CREATE_TABLES.sql"/>
+	<include file="db/changelog/scripts/personal/INSERT_PERSONAL_ADM.sql"/>
+
 	<include file="db/changelog/scripts/auth/AUTH_CREATE_TABLES.sql"/>
 	<include file="db/changelog/scripts/auth/INSERT_CREDENTIAL_ADM.sql"/>
 	
