@@ -21,7 +21,7 @@ public class AuthenticationController {
 	private final AuthService service;
 	private final JwtService jwtService;
 	
-	@PostMapping
+	@PostMapping("login")
     public ResponseEntity<AccessTokenDto> authenticate(@RequestBody LoginDto loginUserDto) {
         var authenticatedUser = service.authenticate(loginUserDto);
         var tokenDto = jwtService.generateToken(authenticatedUser);
