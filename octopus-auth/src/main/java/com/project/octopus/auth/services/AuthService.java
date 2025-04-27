@@ -32,7 +32,7 @@ public class AuthService {
 		var username = input.getUsername();
 		try {
 			authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(username, input.getPasswd()));
+				.authenticate(new UsernamePasswordAuthenticationToken(username, input.getPassword()));
 		} catch(BadCredentialsException e) {
         	eventIn(username, EventTypeEnum.AUTHENTICATION_FAIL, "log.alert.authentication_failed", username);
 			throw e;
