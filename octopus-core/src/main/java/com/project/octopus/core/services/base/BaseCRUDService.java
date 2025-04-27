@@ -7,9 +7,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import com.project.octopus.core.commons.support.exceptions.BusinessException;
 import com.project.octopus.core.domain.base.BaseDto;
 import com.project.octopus.core.domain.base.BaseEntity;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
 @Validated
@@ -19,7 +21,7 @@ public abstract class BaseCRUDService<E extends BaseEntity, D extends BaseDto> e
     public ValidationInterface<D> validation() { return null; }
 
 	@Transactional
-	public E create(@NotNull D input) {
+	public E create(@NotNull @Valid D input) {
 		if (Objects.nonNull(validation()))
 			validation().create(input);
 
@@ -31,7 +33,7 @@ public abstract class BaseCRUDService<E extends BaseEntity, D extends BaseDto> e
 	}
 
 	@Transactional
-	public E update(@NotNull Long code, @NotNull D input){
+	public E update(@NotNull Long code, @NotNull @Valid D input){
 		if (Objects.nonNull(validation()))
 			validation().update(code, input);
 
@@ -57,6 +59,10 @@ public abstract class BaseCRUDService<E extends BaseEntity, D extends BaseDto> e
 		getRepository().delete(entity);
 
 		return code;
+	}
+	
+	protected void uniqueFieldEx(@NotNull String fieldName) {
+		throw new BusinessException(messages.get("db.alert.unique_fields", getEntityName(), fieldName));
 	}
 
 }

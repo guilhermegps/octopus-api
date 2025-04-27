@@ -31,9 +31,10 @@ public class PersonEventListener {
     @Transactional
 	public void handleEvent(UpdatePersonEvent event) {
 		var personEvent = event.getRequestData();
+		var personId = event.getId();
 		
 		var dto = service.getMapper().convert(personEvent);
-		var entity = service.update(null, null);
+		service.update(personId, dto);
 		
 		event.setResponseData(Boolean.TRUE);
 	}

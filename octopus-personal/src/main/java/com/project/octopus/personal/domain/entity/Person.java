@@ -29,7 +29,7 @@ public class Person extends BaseEntity {
 	@Column(length = 100, nullable = false)
 	private String name;
 
-	@Column(length = 11, nullable = false)
+	@Column(length = 11, nullable = false, updatable = false)
 	private String cpf;
 	
 	@Column(nullable = false)
