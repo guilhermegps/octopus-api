@@ -1,5 +1,7 @@
 # OCTOPUS-API
 
+![Octopus-API Icon](https://github.com/guilhermegps/guilhermegps.github.io/blob/main/img/cthulhu.jpg)
+
 ![Java](https://img.shields.io/badge/Java-21-blue)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.4-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
