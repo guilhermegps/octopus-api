@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.octopus.core.domain.enumerations.ProfileEnum;
 
 import lombok.AllArgsConstructor;
@@ -19,10 +20,12 @@ public class SessionUser implements UserDetails {
 	
 	private static final long serialVersionUID = 4314997572307165971L;
 
+	@JsonIgnore
+	private UUID idUser;
+	@JsonIgnore
 	private String password;
 	private List<GrantedAuthority> authorities;
-	
-	private UUID idUser;
+
 	private String username;
 	
 	private ProfileEnum profile;

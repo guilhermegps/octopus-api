@@ -56,7 +56,7 @@ public class ResourceExceptionHandler {
 		
         return ResponseError.builder()
                 .code(HttpStatus.BAD_REQUEST.value())
-                .description(messages.get("val.error.invalid_value"))
+                .description(messages.get("val.error.invalid_field"))
                 .fields(fields)
                 .build();
     }
