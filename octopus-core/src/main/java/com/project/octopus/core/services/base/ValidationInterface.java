@@ -3,8 +3,8 @@ package com.project.octopus.core.services.base;
 
 public interface ValidationInterface<D> {
 	
-    public void create(D dto);
+	default void create(D dto) {}
 
-    public void update(Long code, D dto);
+    default void update(Long code, D dto) {}
 
 }

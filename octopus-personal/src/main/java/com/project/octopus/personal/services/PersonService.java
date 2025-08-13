@@ -33,12 +33,11 @@ public class PersonService extends BaseCRUDService<Person, PersonDto> {
 	@Override
 	public ValidationInterface<PersonDto> validation() {
 		return new ValidationInterface<PersonDto>() {
+			@Override
 			public void create(PersonDto dto) {
 				findEnabledByCpf(dto.getCpf())
 						.ifPresent(p -> uniqueFieldEx("cpf"));
 			}
-
-		    public void update(Long code, PersonDto dto) {}
 		};
 	}
     
@@ -50,7 +49,7 @@ public class PersonService extends BaseCRUDService<Person, PersonDto> {
 	public Person update(UUID id, PersonDto dto) {
 		var code = findById(id).orElseThrow().getCode();
 		
-		return update(code, dto);
+		return super.update(code, dto);
 	}
 
 }
