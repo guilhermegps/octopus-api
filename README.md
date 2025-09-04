@@ -41,6 +41,7 @@ The project is currently divided into the following modules:
 - **octopus-app**: The main application module, housing Spring Boot configurations, Liquibase scripts, and the entry point for the application.
 - **octopus-auth**: Manages authentication and authorization using Spring Security and JJWT. Users authenticate via REST API with credentials and receive a temporary JWT for subsequent API calls.
 - **octopus-personal**: Handles personal data management, including entities like persons, contacts, addresses, and companies.
+- **octopus-test**: Just a module for tools to be used during unit testing.
 
 ## Technologies
 The project uses the following technologies and versions:

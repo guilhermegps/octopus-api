@@ -15,6 +15,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<modules>
+		<module>octopus-test</module>
 		<module>octopus-core</module>
 		<module>octopus-personal</module>
 		<module>octopus-auth</module>
