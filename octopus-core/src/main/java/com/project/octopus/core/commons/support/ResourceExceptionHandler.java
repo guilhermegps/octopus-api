@@ -48,7 +48,7 @@ public class ResourceExceptionHandler {
 	    Map<String, List<String>> fields = new HashMap<>();
 		ex.getBindingResult().getAllErrors().forEach(e -> {
 			var key = ((FieldError) e).getField();
-			var val = messages.get(e);
+			var val = e.getDefaultMessage();
 			
 			if(fields.containsKey(key))
 				fields.get(key).add(val);

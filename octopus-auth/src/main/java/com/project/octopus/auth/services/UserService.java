@@ -13,6 +13,7 @@ import com.project.octopus.auth.domain.dtos.UserDto;
 import com.project.octopus.auth.domain.entity.UserApp;
 import com.project.octopus.auth.domain.mappers.UserMapper;
 import com.project.octopus.auth.repositories.UserRepository;
+import com.project.octopus.core.commons.support.validation.constraints.interfaces.Username;
 import com.project.octopus.core.events.publishers.PersonEventPublisher;
 import com.project.octopus.core.services.base.BaseCRUDService;
 
@@ -38,7 +39,7 @@ public class UserService extends BaseCRUDService<UserApp, UserDto> {
 	private final PasswordEncoder pdEncoder;
 	private final PersonEventPublisher personEventPublisher;
 	
-	public Optional<UserApp> findByUsername(String username) {
+	public Optional<UserApp> findByUsername(@Username String username) {
 		return repository.findOneByUsernameAndEnabled(username, Boolean.TRUE);
 	}
 	

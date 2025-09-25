@@ -4,11 +4,14 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.project.octopus.core.commons.support.validation.constraints.interfaces.Username;
 import com.project.octopus.core.domain.base.BaseDto;
 import com.project.octopus.core.domain.enumerations.ProfileEnum;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +26,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class UserDto extends BaseDto {
 
+	@Username
 	@NotBlank
 	@Size(max =  50, min = 3)
 	private String username;
@@ -45,10 +49,12 @@ public class UserDto extends BaseDto {
 	@Size(max =  11, min = 11)
 	private String cpf;
 
+	@Email
 	@NotBlank
 	@Size(max =  50, min = 5)
 	private String email;
 
+	@Past
 	@NotNull
 	private LocalDate dtBirth;
 
