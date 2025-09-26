@@ -14,9 +14,10 @@ public abstract class BaseCRUDController<E extends BaseEntity, D extends BaseDto
 	protected abstract BaseCRUDService<E, D> getService();
 	
 	protected ResponseEntity<D> toCreate(D input){
-		  var entity = getService().create(input);
+		  E entity = getService().create(input);
+		  D dto = getService().convert(entity);
 		  
-	    return ResponseEntity.ok(getService().convert(entity));
+	    return ResponseEntity.ok(dto);
 	}
 
 	protected ResponseEntity<String> toUpdate(Long code, D input) {

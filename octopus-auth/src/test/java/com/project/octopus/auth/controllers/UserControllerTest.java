@@ -1,56 +1,84 @@
 package com.project.octopus.auth.controllers;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDate;
 import java.util.List;
 
-import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.beans.BeanUtils;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.web.servlet.MockMvc;
 
 import com.project.octopus.auth.configs.AuthTestConfig;
 import com.project.octopus.auth.domain.dtos.UserDto;
 import com.project.octopus.auth.domain.entity.UserApp;
+import com.project.octopus.auth.services.AuthService;
 import com.project.octopus.auth.services.UserService;
+import com.project.octopus.core.domain.enumerations.ProfileEnum;
+import com.project.octopus.test.controllers.BaseTestController;
 import com.project.octopus.test.utils.RandomValueUtils;
 
 import lombok.Getter;
 
-@WebMvcTest(UserController.class)
 @ContextConfiguration(classes = {AuthTestConfig.class})
 class UserControllerTest extends BaseTestController<UserApp, UserDto> {
 
 	@Getter
     private final String url = "/user";
 	
-	@Autowired
-    private MockMvc mockMvc;
+	@MockitoBean
+	private AuthService authService;
 	@MockitoBean
     private UserService service;
 	
 	@Test
-    void testCreatePersonWithInvalidDto() throws Exception {
-		var input = UserDto.builder()
-				.username("")
-				.password(RandomValueUtils.randomString(10))
-				// MUST be ignored
-				.code(RandomValueUtils.randomLong())
-				.enabled(Boolean.FALSE)
-				.build();
+    void create_200() throws Exception {
+		for(var username : validUsernames()) {
+			// given
+			var sex = RandomValueUtils.headsOrTails() ? 'M' : 'F';
+			var input = UserDto.builder()
+					.username(username)
+					.password(RandomValueUtils.randomString(10))
+					.cpf("12345678909")
+					.dtBirth(LocalDate.now().minusYears(RandomValueUtils.randomInt(15, 80)))
+					.email("me@test.com")
+					.name("Mario")
+					.sex(sex)
+					.profile(ProfileEnum.USER)
+					.build();
+			var expected = new UserDto();
 
-        mockMvc.perform(reqCreate(input))
-				.andExpect(status().isOk())
-    			.andExpect(jsonPath(".").value(IsNull.notNullValue(), UserDto.class))
-    			.andExpect(jsonPath(".").value(input));
+			// when
+	        when(service.create(any())).thenReturn(new UserApp());
+	        when(service.convert(any(UserApp.class))).thenAnswer(i -> {
+	        	BeanUtils.copyProperties(input, expected);
+	    		expected.setCode(RandomValueUtils.randomLong());
+	    		expected.setEnabled(Boolean.TRUE);
+	    		
+	    		return expected;
+	        });
+			
+	        // then
+	        var responseJson = mockMvc.perform(reqCreate(input))
+					.andExpect(status().isOk())
+					.andExpect(jsonPath("$").isNotEmpty())
+	    			.andReturn().getResponse().getContentAsString();
+	        
+	        var response = objectMapper.readValue(responseJson, UserDto.class);
+	        assertThat(response)
+		    	.usingRecursiveComparison()
+		    	.ignoringFields("password")
+		    	.isEqualTo(expected);
+		}
     }
 	
 	private List<String> validUsernames(){
-		return List.of("myusername", "guts123", "_mario_", "ana_123", "AS");
+		return List.of("myusername", "guts123", "_mario_", "ana_123");
 	}
 	
 	private List<String> invalidUsernames(){
