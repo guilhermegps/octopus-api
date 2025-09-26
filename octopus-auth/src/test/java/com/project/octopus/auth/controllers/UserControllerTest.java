@@ -1,8 +1,6 @@
 package com.project.octopus.auth.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -10,7 +8,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.BeanUtils;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
@@ -20,19 +17,20 @@ import com.project.octopus.auth.domain.entity.UserApp;
 import com.project.octopus.auth.services.AuthService;
 import com.project.octopus.auth.services.UserService;
 import com.project.octopus.core.domain.enumerations.ProfileEnum;
-import com.project.octopus.test.controllers.BaseTestController;
+import com.project.octopus.test.controllers.BaseCrudTestController;
 import com.project.octopus.test.utils.RandomValueUtils;
 
 import lombok.Getter;
 
 @ContextConfiguration(classes = {AuthTestConfig.class})
-class UserControllerTest extends BaseTestController<UserApp, UserDto> {
+class UserControllerTest extends BaseCrudTestController<UserApp, UserDto> {
 
 	@Getter
     private final String url = "/user";
 	
 	@MockitoBean
 	private AuthService authService;
+	@Getter
 	@MockitoBean
     private UserService service;
 	
@@ -54,14 +52,7 @@ class UserControllerTest extends BaseTestController<UserApp, UserDto> {
 			var expected = new UserDto();
 
 			// when
-	        when(service.create(any())).thenReturn(new UserApp());
-	        when(service.convert(any(UserApp.class))).thenAnswer(i -> {
-	        	BeanUtils.copyProperties(input, expected);
-	    		expected.setCode(RandomValueUtils.randomLong());
-	    		expected.setEnabled(Boolean.TRUE);
-	    		
-	    		return expected;
-	        });
+			whenCreate(input, expected);
 			
 	        // then
 	        var responseJson = mockMvc.perform(reqCreate(input))
