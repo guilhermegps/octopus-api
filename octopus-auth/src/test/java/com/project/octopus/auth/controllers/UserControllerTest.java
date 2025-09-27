@@ -69,11 +69,11 @@ class UserControllerTest extends BaseCrudTestController<UserApp, UserDto> {
     }
 	
 	private List<String> validUsernames(){
-		return List.of("myusername", "guts123", "_mario_", "ana_123");
+		return List.of("myusername", "guts123", "_mario_", "ana_banana");
 	}
 	
 	private List<String> invalidUsernames(){
-		return List.of("$uper", "youAreNotAlone");
+		return List.of("$uper", "youAreNotAlone", "ana.banana");
 	}
 
 }

@@ -10,14 +10,14 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Profile("test")
 @Configuration
-@ComponentScan(basePackages = "com.project.octopus.auth")
+@ComponentScan(basePackages = {"com.project.octopus.auth"})
 @EnableWebSecurity
 public class AuthTestConfig {
 	
 	@Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
-            .csrf(csrf -> csrf.disable());  // Disable for tests
+            .csrf(csrf -> csrf.disable());
         return http.build();
     }
 
