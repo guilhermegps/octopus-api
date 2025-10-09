@@ -13,7 +13,7 @@ spring:
       hibernate.boot.allow_jdbc_metadata_access: false
     show-sql: true
   liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.xml
+    change-log: classpath:db/changelog/test/db.changelog-test.xml
     default-schema: APP
     enabled: true
 ---
