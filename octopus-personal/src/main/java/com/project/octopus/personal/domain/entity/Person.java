@@ -2,6 +2,7 @@ package com.project.octopus.personal.domain.entity;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import com.project.octopus.core.domain.base.BaseEntity;
 
@@ -25,7 +26,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Person extends BaseEntity {
-	
+
 	@Column(length = 100, nullable = false)
 	private String name;
 
@@ -47,5 +48,9 @@ public class Person extends BaseEntity {
 //	@ManyToOne(fetch = FetchType.LAZY)
 //	@JoinColumn(name = "id_address")
 //	private Address address;
+	
+	public Person(UUID id) {
+		this.id = id;
+	}
 
 }
