@@ -25,7 +25,7 @@ public class PersonEventPublisher {
 	@Transactional
 	public UUID createPerson(@Valid PersonEvent personEvent) {
 		var event = new CreatePersonEvent(this, personEvent);
-		eventPublisher.publishEvent(event);
+		eventPublisher.publishEvent(event);	
 		
 		return event.getResponseData();
 	}
